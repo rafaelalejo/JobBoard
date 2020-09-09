@@ -23,6 +23,12 @@ namespace WebAPI
             services.AddPersistence();
             services.AddHttpContextAccessor();
             services.AddControllers();
+
+            services.AddOpenApiDocument(configure =>
+            {
+                configure.Title = "JobBoard API";
+                configure.Version = "v1";
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -37,6 +43,12 @@ namespace WebAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseOpenApi();
+            app.UseSwaggerUi3(settings =>
+            {
+                settings.Path = "/api";
+            });
 
             app.UseEndpoints(endpoints =>
             {
