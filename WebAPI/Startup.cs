@@ -1,4 +1,6 @@
 using Application;
+using CleanArchitecture.WebUI.Filters;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +24,9 @@ namespace WebAPI
             services.AddApplication();
             services.AddPersistence();
             services.AddHttpContextAccessor();
-            services.AddControllers();
+            services.AddControllersWithViews(options =>
+                options.Filters.Add(new ApiExceptionFilterAttribute()))
+                    .AddFluentValidation();
 
             services.AddOpenApiDocument(configure =>
             {
