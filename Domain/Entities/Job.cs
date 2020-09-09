@@ -4,11 +4,11 @@ namespace Domain.Entities
 {
     public class Job
     {
-        public Job(string title, string description, DateTime createdAt, DateTime expiresAt)
+        public Job(string title, string description, DateTime expiresAt)
         {
             Title = title ?? throw new ArgumentNullException(nameof(title));
             Description = description ?? throw new ArgumentNullException(nameof(description));
-            CreatedAt = createdAt;
+            CreatedAt = DateTime.Now;
             ExpiresAt = expiresAt;
         }
 
